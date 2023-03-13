@@ -1,5 +1,4 @@
 package pl.kamski;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,6 +22,5 @@ public class Main {
         names.stream()
                 .filter(name -> name.endsWith("a")) // python way lambda name: name[-1] == "a"
                 .forEach(greeter::greet);
-
     }
 }
