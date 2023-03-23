@@ -74,7 +74,19 @@ public class CreditCardTest {
         assertThrows(
                 CantWithdrawOverCreditException.class,
                 () -> card.withdraw(BigDecimal.valueOf(2000)));
+    }
 
+    @Test
+    void itAllowsToCheckWithdrawsReport() {
+        //Arrange
+        CreditCard card = new CreditCard("1234-4567");
+        card.assignCredit(BigDecimal.valueOf(1000));
 
+        //Act
+        card.withdraw(BigDecimal.valueOf(100));
+        card.withdraw(BigDecimal.valueOf(230));
+        card.withdraw(BigDecimal.valueOf(159));
+
+        assertEquals(card.getWithdrawReport(), "Your withdrawal report:\n- 100,\n- 230,\n- 159,\n");
     }
 }

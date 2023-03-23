@@ -7,31 +7,22 @@ public class CreditCard {
     private BigDecimal credit;
     private final String number;
 
+    private String withdrawReport = "Your withdrawal report:\n";
+    ;
+
     public CreditCard(String cardNumber) {
         this.number = cardNumber;
     }
 
     public void assignCredit(BigDecimal creditAmt) {
-        if(isAlreadyAssigned()){
+        if (isAlreadyAssigned()) {
             throw new CantAssignCreditTwiceException();
         }
-        if (isBelowThreshold(creditAmt)){
+        if (isBelowThreshold(creditAmt)) {
             throw new CreditLimitBelowThresholdException();
         }
         this.credit = creditAmt;
         this.balance = creditAmt;
-    }
-
-    public void withdraw(BigDecimal withdrawAmt){
-        if (IsWithdrawGreaterThanCreditSumBalance(withdrawAmt)){
-            throw new CantWithdrawOverCreditException();
-        }
-        balance = balance.subtract(withdrawAmt);
-    }
-
-    private boolean IsWithdrawGreaterThanCreditSumBalance(BigDecimal withdrawAmt) {
-        BigDecimal sum = credit.add(balance);
-        return (withdrawAmt.compareTo(sum) == 1);
     }
 
     private boolean isAlreadyAssigned() {
@@ -42,7 +33,25 @@ public class CreditCard {
         return Integer.parseInt(creditAmt.toString()) < 100;
     }
 
+
+    public void withdraw(BigDecimal withdrawAmt) {
+        if (IsWithdrawGreaterThanCreditSumBalance(withdrawAmt)) {
+            throw new CantWithdrawOverCreditException();
+        }
+        balance = balance.subtract(withdrawAmt);
+        withdrawReport += String.format("- %s,\n", withdrawAmt);
+    }
+
+    private boolean IsWithdrawGreaterThanCreditSumBalance(BigDecimal withdrawAmt) {
+        BigDecimal sum = credit.add(balance);
+        return (withdrawAmt.compareTo(sum) == 1);
+    }
+
     public BigDecimal getBalance() {
         return balance;
+    }
+
+    public String getWithdrawReport() {
+        return withdrawReport;
     }
 }
