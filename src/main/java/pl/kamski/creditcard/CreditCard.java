@@ -39,7 +39,7 @@ public class CreditCard {
             throw new CantWithdrawOverCreditException();
         }
         balance = balance.subtract(withdrawAmt);
-        withdrawReport += String.format("- %s,\n", withdrawAmt);
+        withdrawReport += String.format("- %s, on  %s %s\n", withdrawAmt, new java.util.Date().toString());
     }
 
     private boolean IsWithdrawGreaterThanCreditSumBalance(BigDecimal withdrawAmt) {
