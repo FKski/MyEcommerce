@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class HashMapProductStorage implements IProductStorage {
+public class HashMapProductStorage implements ProductStorage {
     private Map<String, Product> products;
 
     public HashMapProductStorage() {

@@ -4,64 +4,61 @@ import java.math.BigDecimal;
 import java.util.*;
 
 public class ProductCatalog {
+    // Business
+    // Technical
+    private ProductStorage productStorage;
 
-    private IProductStorage productStorage;
-
-    public ProductCatalog(IProductStorage productStorage) {
+    public ProductCatalog(ProductStorage productStorage) {
         this.productStorage = productStorage;
-    }
-
-    private Map<String, Product> products;
-
-    //    private ArrayList<Product> products = new ArrayList<Product>();
-
-    public ProductCatalog() {
-        this.products = new HashMap<>();
     }
 
     public List<Product> allProducts() {
         return productStorage.allProducts();
     }
 
-
-    public String addProduct(String name, String description) {
-        Product newOne = new Product(
+    public String addProduct(String name, String desc) {
+        Product newOne =  new Product(
                 UUID.randomUUID(),
                 name,
-                description);
-        products.put(newOne.getId(), newOne);
+                desc
+        );
+
+        productStorage.add(newOne);
+
         return newOne.getId();
     }
 
-    public Map<String, Product> allPublishedProducts() {
-        return products;
-    }
-
     public Product loadById(String productId) {
-        return products.get(productId);
+        return productStorage.loadById(productId);
     }
 
     public void changePrice(String productId, BigDecimal newPrice) {
-        Product loaded = this.loadById(productId);
-        loaded.changePrice(newPrice);
+        Product product = loadById(productId);
+
+        product.changePrice(newPrice);
     }
 
-    public void assignImage(String productId, String picture) {
-        Product loaded = this.loadById(productId);
-        loaded.setImage(picture);
+    public void assignImage(String productId, String imageKey) {
+        Product product = loadById(productId);
+
+        product.setImage(imageKey);
     }
 
-    public void publish(String productId) {
-        Product loaded = this.loadById(productId);
+    public void publishProduct(String productId) {
+        Product product = loadById(productId);
 
-        if(loaded.getPrice() == null){
-            throw new ProductCantBePublishedException();
-        }
-        if(loaded.getImage() == null){
+        if (product.getImage() == null) {
             throw new ProductCantBePublishedException();
         }
 
-        products.put(loaded.getId(), loaded);
+        if (product.getPrice() == null) {
+            throw new ProductCantBePublishedException();
+        }
 
+        product.setOnline(true);
+    }
+
+    public List<Product> allPublishedProducts() {
+        return productStorage.allPublishedProducts();
     }
 }

@@ -2,7 +2,7 @@ package pl.kamski.ProductCatalog;
 
 import java.util.List;
 
-public interface IProductStorage {
+public interface ProductStorage {
     List<Product> allProducts();
 
     void add(Product newProduct);
