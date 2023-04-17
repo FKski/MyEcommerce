@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
-public class Main {
+public class App {
     public static void main(String[] args) {
         List<String> names = Arrays.asList("Jakub", "Michal",
                 "Agnieszka", "Ola", "Kasia");

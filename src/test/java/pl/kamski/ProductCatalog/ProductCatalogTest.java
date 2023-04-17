@@ -1,11 +1,9 @@
 package pl.kamski.ProductCatalog;
 
 import org.junit.jupiter.api.Test;
-import pl.kamski.creditcard.CantWithdrawOverCreditException;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
