@@ -45,4 +45,12 @@ public class Product {
     public boolean getOnline(){
         return online;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
 }

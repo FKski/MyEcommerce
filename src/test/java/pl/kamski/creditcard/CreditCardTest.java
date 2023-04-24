@@ -87,6 +87,6 @@ public class CreditCardTest {
         card.withdraw(BigDecimal.valueOf(230));
         card.withdraw(BigDecimal.valueOf(159));
 
-        assertEquals(card.getWithdrawReport(), "Your withdrawal report:\n- 100,\n- 230,\n- 159,\n");
+        assertEquals(card.getWithdrawReport(), "Your withdrawal report:\n-100,\n-230,\n-159,\n");
     }
 }

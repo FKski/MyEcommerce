@@ -2,10 +2,12 @@ package pl.kamski.creditcard;
 
 import java.math.BigDecimal;
 
-public class CreditCard {
+public class CreditCard{
     private BigDecimal balance;
     private BigDecimal credit;
     private final String number;
+
+    
 
     private String withdrawReport = "Your withdrawal report:\n";
     ;
@@ -39,7 +41,7 @@ public class CreditCard {
             throw new CantWithdrawOverCreditException();
         }
         balance = balance.subtract(withdrawAmt);
-        withdrawReport += String.format("- %s, on  %s %s\n", withdrawAmt, new java.util.Date().toString());
+        withdrawReport += String.format("-%s,\n", withdrawAmt);
     }
 
     private boolean IsWithdrawGreaterThanCreditSumBalance(BigDecimal withdrawAmt) {
