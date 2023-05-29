@@ -1,18 +1,15 @@
 package pl.kamski;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.SpringApplicationAotProcessor;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import pl.kamski.ProductCatalog.HashMapProductStorage;
+import pl.kamski.ProductCatalog.Product;
 import pl.kamski.ProductCatalog.ProductCatalog;
-import pl.kamski.ProductCatalog.ProductStorage;
-import pl.kamski.Sales.CartStorage;
-import pl.kamski.Sales.ProductDetailsProvider;
-import pl.kamski.Sales.Sales;
+import pl.kamski.Sales.*;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 @SpringBootApplication
 
@@ -41,6 +38,18 @@ public class Main {
 
     @Bean
     Sales createSales() {
-        return new Sales(new CartStorage(), new ProductDetailsProvider());
+        return new Sales(
+                new CartStorage(),
+                (String productId)->{
+                    Product product = createMyProductCatalog().loadById(productId);
+                    if (product==null){
+                        return Optional.empty();
+                    }
+                    return Optional.of(new ProductDetails(
+                            product.getId(),
+                            product.getName(),
+                            product.getPrice()
+                    ));
+                });
     }
 }

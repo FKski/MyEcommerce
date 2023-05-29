@@ -3,6 +3,7 @@ package pl.kamski.Sales;
 
 import java.util.Optional;
 
+
 public class Sales {
     private CartStorage cartStorage;
     private ProductDetailsProvider productDetailsProvider;
@@ -15,12 +16,12 @@ public class Sales {
     public void addToCart(String customerId, String productId) {
         Cart cart = loadForCustomer(customerId)
                 .orElse(Cart.empty());
-        Product product = loadDetailsForProduct(productId);
+        ProductDetails product = loadDetailsForProduct(productId);
         cart.add(product);
         cartStorage.save(customerId, cart);
     }
 
-    private Product loadDetailsForProduct(String productId) {
+    private ProductDetails loadDetailsForProduct(String productId) {
         return productDetailsProvider.load(productId)
                 .orElseThrow(()-> new NoSuchProductException()  );
     }

@@ -20,9 +20,9 @@ public class SalesController {
         return sales.getCurrentOffer(getCurrentCustomer());
     }
 
-    @PostMapping("/api/add-to-cart/{productId}")
+    @PostMapping("/api/addS-to-cart/{productId}")
     public void addToCart(@PathVariable String produdctId){
-
+    sales.addToCart(getCurrentCustomer(),produdctId);
     }
 
     private String getCurrentCustomer(){

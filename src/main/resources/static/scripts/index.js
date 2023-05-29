@@ -46,7 +46,7 @@ const createHtmlComponent = (product) => {
 
 const initializeAddToCartHandler = (htmlEl) => {
     const btn = htmlEl.querySelector('button.product_addToCart');
-    btn.addEventListener('click', () =>{
+    btn.addEventListener('click', () => {
         addToCart(btn.getAttribute('data-product-id'))
             .then(refreshOffer());
     });
@@ -54,8 +54,8 @@ const initializeAddToCartHandler = (htmlEl) => {
     return htmlEl;
 }
 
-const addToCart = () =>{
-    return fetch(`/api/add-to-cart/${productId}`, {method:"POST"});
+const addToCart = (productId) => {
+    return fetch(`/api/add-to-cart/${productId}`, {method: "POST"});
 }
 
 (async () => {

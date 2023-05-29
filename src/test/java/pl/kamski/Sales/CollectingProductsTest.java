@@ -5,12 +5,12 @@ import org.junit.jupiter.api.Test;
 
 public class CollectingProductsTest {
     CartStorage cartStorage;
-    ProductDetailsProvider productDetailsProvider;
+    AlwaysMissingProductDetailsProvider productDetailsProvider;
 
     @BeforeEach
     void setup(){
         cartStorage = new CartStorage();
-        productDetailsProvider = new ProductDetailsProvider();
+        productDetailsProvider = new AlwaysMissingProductDetailsProvider();
     }
 
     @Test
