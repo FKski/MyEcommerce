@@ -1,4 +1,4 @@
-package pl.kamski.Sales;
+package pl.kamski.Sales.product;
 
 public class NoSuchProductException extends IllegalStateException {
 }

@@ -1,34 +1,40 @@
 package pl.kamski.Sales;
 
-import org.aspectj.apache.bcel.util.Repository;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
+import pl.kamski.Sales.reservation.Reservation;
+import pl.kamski.Sales.reservation.ReservationRepository;
+
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @SpringBootTest
 public class ReservationStorageTest {
 
     @Autowired
-    ReservationRepository repository;
-    @Test
-    void insert(){
-        Reservation reservation = new Reservation("res-1234abcd", BigDecimal.valueOf(10.10), "payu/12345");
-        repository.save(reservation);
+    ReservationRepository reservationRepository;
 
-        Reservation loaded = repository
-                .findById("res-12345abcd")
+    @Test
+    void insert() {
+        Reservation reservation = new Reservation(
+                UUID.randomUUID().toString(),
+                BigDecimal.TEN,
+                "payment");
+        reservationRepository.save(reservation);
+    }
+
+    @Test
+    void select() {
+        String id = UUID.randomUUID().toString();
+        Reservation reservation = new Reservation(
+                id,
+                BigDecimal.TEN,
+                "payment");
+        reservationRepository.save(reservation);
+
+        Reservation loaded =  reservationRepository.findById(id)
                 .get();
-
-        assert loaded.getId().equals(reservation.getId());
     }
-    @Test
-    void select(){
-
-    }
-
-
 }

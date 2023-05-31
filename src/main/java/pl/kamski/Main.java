@@ -7,6 +7,8 @@ import pl.kamski.ProductCatalog.HashMapProductStorage;
 import pl.kamski.ProductCatalog.Product;
 import pl.kamski.ProductCatalog.ProductCatalog;
 import pl.kamski.Sales.*;
+import pl.kamski.Sales.cart.CartStorage;
+import pl.kamski.Sales.product.ProductDetails;
 
 import java.math.BigDecimal;
 import java.util.Optional;

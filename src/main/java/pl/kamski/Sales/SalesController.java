@@ -1,10 +1,10 @@
 package pl.kamski.Sales;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pl.kamski.Sales.offering.Offer;
 
 @RestController
 public class SalesController {
@@ -15,18 +15,18 @@ public class SalesController {
         this.sales = sales;
     }
 
-    @GetMapping("/api/offer")
+    @GetMapping("/api/get-current-offer")
     public Offer getCurrentOffer(){
         return sales.getCurrentOffer(getCurrentCustomer());
     }
 
-    @PostMapping("/api/addS-to-cart/{productId}")
-    public void addToCart(@PathVariable String produdctId){
-    sales.addToCart(getCurrentCustomer(),produdctId);
+    @PostMapping("/api/add-to-cart/{productId}")
+    public void addToCart(@PathVariable String productId){
+    sales.addToCart(getCurrentCustomer(),productId);
     }
 
     private String getCurrentCustomer(){
-        return "Filip";
+        return "filip";
     }
 
 }

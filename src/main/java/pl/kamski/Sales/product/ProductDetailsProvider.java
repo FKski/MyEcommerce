@@ -1,4 +1,4 @@
-package pl.kamski.Sales;
+package pl.kamski.Sales.product;
 
 import java.util.Optional;
 

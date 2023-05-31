@@ -2,44 +2,53 @@ package pl.kamski.Sales;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pl.kamski.Sales.cart.Cart;
+import pl.kamski.Sales.cart.CartStorage;
+import pl.kamski.Sales.product.AlwaysMissingProductDetailsProvider;
+import pl.kamski.Sales.product.ProductDetailsProvider;
+
+import java.util.UUID;
 
 public class CollectingProductsTest {
-    CartStorage cartStorage;
-    AlwaysMissingProductDetailsProvider productDetailsProvider;
+
+    private CartStorage cartStorage;
+    private ProductDetailsProvider productDetailsProvider;
 
     @BeforeEach
-    void setup(){
+    void setup() {
         cartStorage = new CartStorage();
         productDetailsProvider = new AlwaysMissingProductDetailsProvider();
     }
 
     @Test
-    void itAllowsToAddProductToCart(){
+    void itAllowsToCollectProductsToCart() {
         //Arrange
         Sales sales = thereIsSalesModule();
-        String customerId = thereIsCustomer("Filip");
-        String productId = thereIsProduct();
-        //Act
-        sales.addToCart(customerId, productId);
-        //Assert
-        assertCustomerCartContainsNProducts(customerId, 1);
+        String productId =  thereIsProduct();
+        String customer = thereIsCustomer("filip");
 
+        //Act
+        sales.addToCart(customer, productId);
+
+        //Assert
+        assertThereIsNProductsInCustomersCart(customer, 1);
     }
 
-    private void assertCustomerCartContainsNProducts(String customerId, int productsCount) {
-        Cart customerCart = cartStorage.load(customerId).get();
+    private void assertThereIsNProductsInCustomersCart(String customer, int productsCount) {
+        Cart customerCart = cartStorage.load(customer).get();
+
         assert customerCart.itemsCount() == productsCount;
     }
 
-    private String thereIsProduct() {
-        return null;
+    private String thereIsCustomer(String customerId) {
+        return customerId;
     }
 
-    private String thereIsCustomer(String customer) {
-        return null;
+    private String thereIsProduct() {
+        return UUID.randomUUID().toString();
     }
 
     private Sales thereIsSalesModule() {
-        return null;
+        return new Sales(cartStorage, productDetailsProvider);
     }
 }
