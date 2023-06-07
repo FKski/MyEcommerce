@@ -14,6 +14,10 @@ public class SalesController {
     public SalesController(Sales sales){
         this.sales = sales;
     }
+    @PostMapping("/api/accept-offer")
+    public void acceptOffer() {
+        sales.acceptOffer(getCurrentCustomer(), getCurrentAcceptOffer());
+    }
 
     @GetMapping("/api/get-current-offer")
     public Offer getCurrentOffer(){
@@ -28,5 +32,9 @@ public class SalesController {
     private String getCurrentCustomer(){
         return "filip";
     }
+    private  AcceptOffer getCurrentAcceptOffer(){
+        return new AcceptOffer("filip@ex.com","filip");
+    }
+
 
 }

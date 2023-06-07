@@ -31,13 +31,15 @@ public class OfferAcceptanceHTTPTest {
         http.postForEntity(String.format("/api/add-to-cart/%s", productId), null, String.class);
 
         //Act
-        AcceptOffer acceptOffer = new AcceptOffer("Jakub", "jakub@example.com");
-        ResponseEntity<PaymentData> response = http.postForEntity(String.format("/api/accept-offer"), acceptOffer, PaymentData.class);
+        AcceptOffer acceptOffer = new AcceptOffer("Filip", "filip@example.com");
+        ResponseEntity<PaymentData> response = http.postForEntity("/api/accept-offer", acceptOffer, PaymentData.class);
 
         //Assert
         assertEquals(response.getStatusCode(), HttpStatus.OK);
+        assertNotNull(response.getBody().getPaymentId());
         assertNotNull(response.getBody().getPaymentUrl());
     }
+
 
     private String thereIsExampleProduct() {
         return productCatalog.allPublishedProducts().stream()

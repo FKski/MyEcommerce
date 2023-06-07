@@ -27,16 +27,24 @@ const createHtmlElementFromString = (template) => {
 const createProductComponent = (product) => {
     const template = `
         <li class="product">
-            <span>${product.name}</span>
-            <div>
-                <span>${product.price}</span>
+            <div class="product-el">
+                <span>product: ${product.name}</span>
             </div>
+            <div class="product-el">
+                <span>price: ${product.price}</span>
+            </div>
+            <div class="product-el">
+                <img src="${product.image}" alt="Image of product ${product.name}">
+            </div>
+            <div class="product-el">
             <button
                 class="product__add-to-cart"
                 data-product-id="${product.id}"
             >
                 Add to cart
             </button>
+            </div>
+            
         </li>
     `;
 

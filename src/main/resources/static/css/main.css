@@ -1,3 +1,28 @@
 body{
-    color: green;
+    color: #DCD7C9;
+    background-color: #2C3639;
+    font-family: "JetBrains Mono", sans-serif;
+}
+.cart button{
+    background-color: #A27B5C;
+}
+
+.product{
+    margin-bottom: 2vh;
+    border: 1px solid black;
+    padding: 10px;
+    width: 20vw;
+
+}
+.product img{
+    height: 30%;
+    width: 100%;
+}
+
+.product__add-to-cart{
+    background-color: #A27B5C;
+}
+.product-el{
+    margin-bottom: 0.5vh;
+    background-color: #2C3639;
 }

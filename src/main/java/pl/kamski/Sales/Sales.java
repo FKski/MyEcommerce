@@ -8,17 +8,21 @@ import pl.kamski.Sales.product.NoSuchProductException;
 import pl.kamski.Sales.product.ProductDetails;
 import pl.kamski.Sales.product.ProductDetailsProvider;
 import pl.kamski.Sales.reservation.Reservation;
+import pl.kamski.payu.*;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 
 public class Sales {
     private CartStorage cartStorage;
     private ProductDetailsProvider productDetailsProvider;
+    PayU payU;
 
-    public Sales(CartStorage cartStorage, ProductDetailsProvider productDetailsProvider) {
+    public Sales(CartStorage cartStorage, ProductDetailsProvider productDetailsProvider, PayU payU) {
         this.cartStorage= cartStorage;
         this.productDetailsProvider = productDetailsProvider;
+        this.payU = payU;
     }
 
     public void addToCart(String customerId, String productId) {
@@ -44,15 +48,27 @@ public class Sales {
     public Offer getCurrentOffer(String currentCustomer) {
         return new Offer();
     }
-    public PaymentData acceptOffer(String customerId) {
+    public PaymentData acceptOffer(String customerId, AcceptOffer request) {
 
         Offer offer = getCurrentOffer(customerId);
 
-//        Reservation reservation = Reservation.from(offer);
-//
-//        reservationStorage.save(reservation);
+        OrderCreateRequest orderCreateRequest = new OrderCreateRequest();
+        orderCreateRequest.setBuyer(
+                new Buyer()
+                        .setEmail(request.getEmail())
+                        .setFirstName(request.getFname())
+        );
+        orderCreateRequest.setProducts(Arrays.asList(
+                new Product()
+                        .setName("Nice service")
+                        .setUnitPrice(1)
+                        .setUnitPrice(1000)
+        ));
 
 
-        return null;
+        OrderCreateResponse response = payU.handle(orderCreateRequest);
+
+        return new PaymentData(response.getRedirectUri(), response.getOrderId());
+
     }
 }

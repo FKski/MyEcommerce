@@ -6,6 +6,7 @@ import pl.kamski.Sales.cart.Cart;
 import pl.kamski.Sales.cart.CartStorage;
 import pl.kamski.Sales.product.AlwaysMissingProductDetailsProvider;
 import pl.kamski.Sales.product.ProductDetailsProvider;
+import pl.kamski.payu.PayU;
 
 import java.util.UUID;
 
@@ -13,6 +14,8 @@ public class CollectingProductsTest {
 
     private CartStorage cartStorage;
     private ProductDetailsProvider productDetailsProvider;
+
+    private PayU payU;
 
     @BeforeEach
     void setup() {
@@ -49,6 +52,6 @@ public class CollectingProductsTest {
     }
 
     private Sales thereIsSalesModule() {
-        return new Sales(cartStorage, productDetailsProvider);
+        return new Sales(cartStorage, productDetailsProvider, payU);
     }
 }
