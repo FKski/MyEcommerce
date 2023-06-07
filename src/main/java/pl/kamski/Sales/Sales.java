@@ -63,6 +63,7 @@ public class Sales {
                         .setName("Nice service")
                         .setUnitPrice(1)
                         .setUnitPrice(1000)
+                        .setCurrencyCode("PLN")
         ));
 
 

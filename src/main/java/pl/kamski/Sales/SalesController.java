@@ -30,10 +30,10 @@ public class SalesController {
     }
 
     private String getCurrentCustomer(){
-        return "filip";
+        return "Filip";
     }
     private  AcceptOffer getCurrentAcceptOffer(){
-        return new AcceptOffer("filip@ex.com","filip");
+        return new AcceptOffer("filip@example.com","filip");
     }
 
 

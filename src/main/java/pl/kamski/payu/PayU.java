@@ -17,7 +17,7 @@ public class PayU {
 
         String url = "https://secure.snd.payu.com/api/v2_1/orders";
         HttpHeaders headers= new HttpHeaders();
-        headers.add("Content-Type", "application/json");
+        headers.add("Content-Type", " application/json");
         headers.add("Authorization", String.format("Bearer %s", getToken()));
 
         HttpEntity<OrderCreateRequest> request = new HttpEntity<>(orderCreateRequest,headers);

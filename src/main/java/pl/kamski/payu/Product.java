@@ -6,6 +6,17 @@ public class Product {
     Integer unitPrice;
     Integer quantity;
 
+    public String getCurrencyCode() {
+        return currencyCode;
+    }
+
+    public Product setCurrencyCode(String currencyCode) {
+        this.currencyCode = currencyCode;
+        return this;
+    }
+
+    String currencyCode;
+
     public String getName() {
         return name;
     }
@@ -32,6 +43,7 @@ public class Product {
         this.quantity = quantity;
         return this;
     }
+
 
 
 }

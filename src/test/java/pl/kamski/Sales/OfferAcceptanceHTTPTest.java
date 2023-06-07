@@ -28,10 +28,10 @@ public class OfferAcceptanceHTTPTest {
         String productId = thereIsExampleProduct();
         //customerAddedProductToCart
         http.postForEntity(String.format("/api/add-to-cart/%s", productId), null, String.class);
-        http.postForEntity(String.format("/api/add-to-cart/%s", productId), null, String.class);
+//        http.postForEntity(String.format("/api/add-to-cart/%s", productId), null, String.class);
 
         //Act
-        AcceptOffer acceptOffer = new AcceptOffer("Filip", "filip@example.com");
+        AcceptOffer acceptOffer = new AcceptOffer("filip@example.com", "filip");
         ResponseEntity<PaymentData> response = http.postForEntity("/api/accept-offer", acceptOffer, PaymentData.class);
 
         //Assert
