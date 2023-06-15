@@ -15,8 +15,8 @@ public class SalesController {
         this.sales = sales;
     }
     @PostMapping("/api/accept-offer")
-    public void acceptOffer() {
-        sales.acceptOffer(getCurrentCustomer(), getCurrentAcceptOffer());
+    public PaymentData acceptOffer() {
+        return  sales.acceptOffer(getCurrentCustomer(), getCurrentAcceptOffer());
     }
 
     @GetMapping("/api/get-current-offer")
@@ -24,9 +24,9 @@ public class SalesController {
         return sales.getCurrentOffer(getCurrentCustomer());
     }
 
-    @PostMapping("/api/add-to-cart/{productId}")
-    public void addToCart(@PathVariable String productId){
-    sales.addToCart(getCurrentCustomer(),productId);
+    @PostMapping("/api/cart/{productId}")
+    public void addToCart(@PathVariable String productId) {
+        sales.addToCart(getCurrentCustomer(), productId);
     }
 
     private String getCurrentCustomer(){

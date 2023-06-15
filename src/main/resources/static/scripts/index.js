@@ -10,13 +10,17 @@ const getProducts = () => {
         .then(response => response.json());
 }
 
-const addToCart = (productId) => {
-    return fetch(`/api/add-to-cart/${productId}`, {
-        method: "POST",
-        body: JSON.stringify({})
-    }).then(response => response.json());
-}
-
+// const addToCart = (productId) => {
+//     return fetch(`/api/add-to-cart/${productId}`, {
+//         method: "POST",
+//         body: JSON.stringify({})
+//     }).then(response => response.json());
+// }
+const handleAddToCart = (productId) => {
+    return fetch(`/api/cart/${productId}`, {
+        method: 'POST'
+    });
+};
 const createHtmlElementFromString = (template) => {
     let tmpElement = document.createElement('div');
     tmpElement.innerHTML = template.trim();
@@ -66,16 +70,28 @@ const refreshCurrentOffer = () => {
         });
 }
 
+// const initializeAddToCartHandler = (el) => {
+//     const btn = el.querySelector('button.product__add-to-cart');
+//     btn.addEventListener('click', () => {
+//         addToCart(btn.getAttribute('data-product-id'))
+//             .then(refreshCurrentOffer())
+//     });
+//
+//     return el;
+// }
 const initializeAddToCartHandler = (el) => {
-    const btn = el.querySelector('button.product__add-to-cart');
-    btn.addEventListener('click', () => {
-        addToCart(btn.getAttribute('data-product-id'))
-            .then(refreshCurrentOffer())
+    el.addEventListener('click', (e) => {
+        let button = e.target;
+        const productId = button.getAttribute('data-product-id');
+
+        handleAddToCart(productId)
+            .then(() => refreshCurrentOffer())
+            .catch((error) => console.log(error))
+        ;
     });
 
     return el;
 }
-
 (async () => {
     console.log("It works :)");
     const productsList = document.querySelector('#productsList');

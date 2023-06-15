@@ -7,7 +7,7 @@ public class Offer {
     BigDecimal total;
     Integer itemsCount;
     public Offer(){
-        this.total = BigDecimal.ZERO;
+        this.total = BigDecimal.valueOf(100);
         this.itemsCount = 0;
     }
 
